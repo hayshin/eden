@@ -25,7 +25,7 @@ export class EdenWS<in out Schema extends InputSchema<any> = {}> {
 
 	on<K extends keyof WebSocketEventMap>(
 		type: K,
-		listener: (event: Treaty.WSEvent<K, Schema["response"][200]>) => void,
+		listener: (event: Treaty.WSEvent<K, Schema["response"]>) => void,
 		options?: boolean | AddEventListenerOptions,
 	) {
 		return this.addEventListener(type, listener, options);
@@ -42,9 +42,7 @@ export class EdenWS<in out Schema extends InputSchema<any> = {}> {
 	}
 
 	subscribe(
-		onMessage: (
-			event: Treaty.WSEvent<"message", Schema["response"][200]>,
-		) => void,
+		onMessage: (event: Treaty.WSEvent<"message", Schema["response"]>) => void,
 		options?: boolean | AddEventListenerOptions,
 	) {
 		return this.addEventListener("message", onMessage, options);
@@ -52,7 +50,7 @@ export class EdenWS<in out Schema extends InputSchema<any> = {}> {
 
 	addEventListener<K extends keyof WebSocketEventMap>(
 		type: K,
-		listener: (event: Treaty.WSEvent<K, Schema["response"][200]>) => void,
+		listener: (event: Treaty.WSEvent<K, Schema["response"]>) => void,
 		options?: boolean | AddEventListenerOptions,
 	) {
 		this.ws.addEventListener(
